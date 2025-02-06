@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Predictor</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-weight: 500;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus, input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .score-inputs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        .form-note {
+            text-align: center;
+            color: #7f8c8d;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Student Performance Predictor</h1>
+        <form action="{{ url_for('predict_datapoint')}}" method="POST">
+            <!-- Personal Information -->
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="ethnicity">Race / Ethnicity</label>
+                <select id="ethnicity" name="ethnicity" required>
+                    <option value="">Select Group</option>
+                    <option value="group A">Group A</option>
+                    <option value="group B">Group B</option>
+                    <option value="group C">Group C</option>
+                    <option value="group D">Group D</option>
+                    <option value="group E">Group E</option>
+                </select>
+            </div>
+
+            <!-- Parental Education -->
+            <div class="form-group">
+                <label for="parental_education">Parental Education Level</label>
+                <select id="parental_education" name="parental_education" required>
+                    <option value="">Select Education Level</option>
+                    <option value="bachelor's degree">Bachelor's Degree</option>
+                    <option value="some college">Some College</option>
+                    <option value="master's degree">Master's Degree</option>
+                    <option value="associate's degree">Associate's Degree</option>
+                    <option value="high school">High School</option>
+                </select>
+            </div>
+
+            <!-- Test Preparation -->
+            <div class="form-group">
+                <label for="lunch">Lunch Type</label>
+                <select id="lunch" name="lunch" required>
+                    <option value="">Select Lunch Type</option>
+                    <option value="standard">Standard</option>
+                    <option value="free/reduced">Free/Reduced</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="test_prep">Test Preparation Course</label>
+                <select id="test_prep" name="test_prep" required>
+                    <option value="">Select Preparation Status</option>
+                    <option value="completed">Completed</option>
+                    <option value="not completed">Not Completed</option>
+                </select>
+            </div>
+
+            <!-- Score Inputs -->
+            <div class="score-inputs">
+                <!-- <div class="form-group">
+                    <label for="math_score">Math Score</label>
+                    <input type="number" id="math_score" name="math_score" 
+                           min="0" max="100" placeholder="0-100" required>
+                </div> -->
+
+                <div class="form-group">
+                    <label for="reading_score">Reading Score</label>
+                    <input type="number" id="reading_score" name="reading_score" 
+                           min="0" max="100" placeholder="0-100" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="writing_score">Writing Score</label>
+                    <input type="number" id="writing_score" name="writing_score" 
+                           min="0" max="100" placeholder="0-100" required>
+                </div>
+            </div>
+
+            <button type="submit">Predict Performance 🚀</button>
+
+            <div class="form-group">
+                <h4>Result = {{results}}</h4>
+            </div>
+        </form>
+        <p class="form-note">All fields are required for accurate prediction</p>
+    </div>
+</body>
+</html>
